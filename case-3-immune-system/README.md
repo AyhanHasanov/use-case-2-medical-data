@@ -781,6 +781,9 @@
         -   `NULLABLE`  (varchar)
         -   `SOURCE`  (varchar)
 
+### Диаграма с примерни връзки
+![covid19-erd](https://github.com/user-attachments/assets/250e808a-e275-4063-a0b1-f3ffc4038496)
+
 ## USE CASES
 ---
 
