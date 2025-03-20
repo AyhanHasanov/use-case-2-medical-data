@@ -669,7 +669,7 @@
 **Решение:** Може да направим няколко основни таблици, в които ще пазим нужната информация. Ще "групираме" сходните таблици.
 
 Нови таблици:
- 1.  **Mobility_data**
+### 1.  **Mobility_data**
 -   **Таблици, които ще се съединят:**  `APPLE_MOBILITY`,  `GOOG_GLOBAL_MOBILITY_REPORT`
     -   **Колони:**   
         -   `COUNTRY_REGION`  (text)
@@ -684,7 +684,7 @@
         -   `WORKPLACES_CHANGE_PERC`  (float)
         -   `RESIDENTIAL_CHANGE_PERC`  (float)
 ---
-2.  **Hospitalization_data**
+### 2.  **Hospitalization_data**
 -   **Таблици, които ще се съединят:**  `CDC_INPATIENT_BEDS_ALL`,  `CDC_INPATIENT_BEDS_COVID_19`,  `CDC_INPATIENT_BEDS_ICU_ALL`,  `KFF_US_ICU_BEDS`,  `SCS_BE_DETAILED_HOSPITALISATIONS`
     -   **Колони:**
         -   `COUNTRY_REGION`  (text)
@@ -701,9 +701,9 @@
         -   `NEW_OUT`  (number)
             
 ---
-3.  **Testing_data**
+### 3.  **Testing_data**
 -   **Таблици, които ще се съединят::**  `CDC_TESTING`,  `CT_US_COVID_TESTS`,  `NYC_HEALTH_TESTS`,  `SCS_BE_DETAILED_TESTS`
-    -   **Columns:**
+    -   **Колони:**
         -   `COUNTRY_REGION`  (text)
         -   `PROVINCE_STATE`  (text)
         -   `DATE`  (date)
@@ -714,7 +714,7 @@
         -   `PERCENT_POSITIVE`  (float)
             
 ---
-4.  **Vaccination_data**
+### 4.  **Vaccination_data**
 -   **Tаблици, които ще се съединят:**  `JHU_VACCINES`,  `OWID_VACCINATIONS`
     -   **Колони:**
         -   `COUNTRY_REGION`  (text)
@@ -728,7 +728,7 @@
         -   `VACCINES_USED`  (text)
             
 ---
-5.  **Case_and_death_data**
+### 5.  **Case_and_death_data**
 -   **Таблици, които ще се съединят:**  `ECDC_GLOBAL`,  `ECDC_GLOBAL_WEEKLY`,  `JHU_COVID_19`,  `JHU_COVID_19_TIMESERIES`,  `JHU_DASHBOARD_COVID_19_GLOBAL`,  `NYT_US_COVID19`,  `PCM_DPS_COVID_19`,  `PCM_DPS_COVID19_DETAILS`,  `RKI_GER_COVID19_DASHBOARD`,  `SCS_BE_DETAILED_MORTALITY`,  `SCS_BE_DETAILED_PROVINCE_CASE_COUNTS`,  `VH_CAN_DETAILED`,  `WHO_DAILY_REPORT`,  `WHO_SITUATION_REPORTS`
     -   **Колони:**
         -   `COUNTRY_REGION`  (text)
@@ -744,7 +744,7 @@
         -   `ACTIVE_CASES`  (number)
             
 ---
-6.  **Policy_measures**
+### 6.  **Policy_measures**
 -   **Таблици, които ще се съединят:**  `CDC_POLICY_MEASURES`,  `HDX_ACAPS`,  `HUM_RESTRICTIONS_AIRLINE`,  `HUM_RESTRICTIONS_COUNTRY`,  `KFF_US_POLICY_ACTIONS`,  `KFF_US_REOPENING_TIMELINE_INCREMENT`,  `KFF_US_MITIGATIONS`,  `NYT_US_REOPEN_STATUS`
     -   **Колони:**
         -   `COUNTRY_REGION`  (text)
@@ -758,7 +758,7 @@
         -   `SOURCE`  (text)
             
 ---
-7.  **Demographics**
+### 7.  **Demographics**
 -   **Таблици, които ще се съединят:**  `DATABANK_DEMOGRAPHICS`,  `DEMOGRAPHICS`
     -   **Колони:**
         -   `COUNTRY_REGION`  (text)
@@ -770,7 +770,7 @@
         -   `LONGITUDE`  (float)
             
 ---
-8.  **Metadata**
+### 8.  **Metadata**
 -   **Таблици, които ще се съединят:**  `METADATA`
     -   **Колони:**
         -   `TABLE`  (varchar)
@@ -780,25 +780,6 @@
         -   `COMMENTS`  (varchar)
         -   `NULLABLE`  (varchar)
         -   `SOURCE`  (varchar)
-
-### Примерни връзки между новите таблици:
-| Таблица 1                      | Таблица 2                        | Връзка                                  | Причина                                                                                  | Пример за използване                                                               |
-|--------------------------------|----------------------------------|-----------------------------------------|-----------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
-| CASES                         | TESTING                         | Регион, Държава, Дата, Възрастова група, Пол | Анализ на връзката между положителните случаи и резултатите от тестовете по демография и региони. | Сравняване на процента положителни тестове по регион или демографска група.      |
-| CASES                         | HOSPITALIZATIONS                   | Регион, Държава, Дата, Изход (Хоспитализиран, ICU) | Оценка на тежестта на случаите, довели до хоспитализация или интензивно лечение.         | Определяне на процента хоспитализации сред потвърдените случаи.                  |
-| CASES                         | VACCINATIONS                       | Регион, Държава, Дата, Възрастова група       | Оценка на влиянието на ваксинацията върху честотата на инфекциите или изхода от тях.     | Анализ на процента заразени сред ваксинираните и неваксинираните групи.          |
-| CASES                         | MORTALITY                        | Регион, Държава, Дата, Възрастова група, Пол | Разбиране на нивата на смъртност по демографски фактори и сравняване на изходите.        | Анализ на смъртността по възрастова група или регион.                             |
-| HOSPITALIZATIONS                 | MORTALITY                        | Регион, Държава, Дата, Вид на болницата (ICU, Обща) | Идентифициране на смъртността сред хоспитализираните пациенти.                            | Оценка на смъртността в ICU и анализ на натоварването на здравната система.       |
-| HOSPITALIZATIONS                 | MOBILITY AND PUBLIC BEHAVIOUR | Регион, Държава, Дата                   | Анализ на връзката между мобилността и хоспитализациите.                                   | Оценка дали по-строгите мерки намаляват броя на тежките случаи.                   |
-| GOVERNMENT POLICIES AND MEASURES | Всички други таблици             | Държава, Регион, Дата                   | Анализ на ефективността на политиките върху броя на случаите, хоспитализациите и смъртността. | Оценка дали локдауните или носенето на маски водят до намалено предаване на вируса. |
-| DEMOGRAPHICS                     | Всички други таблици             | Регион, Държава                         | Нормализиране на данните спрямо населението за сравняване на честоти (случаи, смъртност, хоспитализации) по региони. | Анализ на процента заразени на 100 000 души по демографски разпределения.        |
-| SUMMARY STATISTICS            | Всички други таблици             | Регион, Държава, Дата                   | Предоставяне на агрегирани данни за времеви анализ и репорти.                               | Сравняване на дневни, седмични или месечни тенденции на случаи, смъртност и хоспитализации. |
-| METADATA AND SOURCE TRACKING | Всички други таблици             | Име на таблица, Име на колона           | Осигуряване на качеството на данните и разбиране на техния произход.                         | Идентифициране на източниците на данни за съответствие и проверка.               |
-
-
-
-
-
 
 ## USE CASES
 ---
