@@ -669,17 +669,117 @@
 **Решение:** Може да направим няколко основни таблици, в които ще пазим нужната информация. Ще "групираме" сходните таблици.
 
 Нови таблици:
-
-1.  **Cases (Случаи):** Информация за потвърдени случаи на COVID-19, включително демографски данни, изход на заболяването и ваксинационен статус.
-2.  **Testing (Тестване):** Данни за тестове за COVID-19, включително резултати, видове тестове и места за тестване.
-3.  **Hospitalizations (Хоспитализации):** Записи за хоспитализации, прием в интензивно отделение и изход от лечението при COVID-19.
-4.  **Vaccinations (Ваксинации):** Подробности за приложените ваксини, дози и места за ваксинация.
-5.  **Mortality (Смъртност):** Информация за смъртните случаи, свързани с COVID-19, демографски данни и място на смъртта.
-6.  **Mobility and Public Behavior (Мобилност и обществено поведение):** Данни за промени в мобилността и поведението на обществото по време на пандемията.
-7.  **Government Policies and Measures (Правителствени политики и мерки):** Информация за политиките, ограниченията и мерките, наложени за контролиране на пандемията.
-8.  **Demographics (Демография):** Демографски данни за населението като възрастова структура, пол и брой на населението.
-9.  **Summary Statistics (Обобщена статистика):** Агрегирани данни за случаи, смъртност, хоспитализации и ваксинации във времето.
-10.  **Metadata and Source Tracking (Метаданни и проследяване на източници):** Информация за източниците на данни, тяхната надеждност и допълнителни метаданни за всички останали таблици.
+ 1.  **Mobility_data**
+-   **Таблици, които ще се съединят:**  `APPLE_MOBILITY`,  `GOOG_GLOBAL_MOBILITY_REPORT`
+    -   **Колони:**   
+        -   `COUNTRY_REGION`  (text)
+        -   `PROVINCE_STATE`  (text)
+        -   `DATE`  (date)
+        -   `TRANSPORTATION_TYPE`  (text)
+        -   `DIFFERENCE`  (float)
+        -   `RETAIL_AND_RECREATION_CHANGE_PERC`  (float)
+        -   `GROCERY_AND_PHARMACY_CHANGE_PERC`  (float)
+        -   `PARKS_CHANGE_PERC`  (float)
+        -   `TRANSIT_STATIONS_CHANGE_PERC`  (float)
+        -   `WORKPLACES_CHANGE_PERC`  (float)
+        -   `RESIDENTIAL_CHANGE_PERC`  (float)
+---
+2.  **Hospitalization_data**
+-   **Таблици, които ще се съединят:**  `CDC_INPATIENT_BEDS_ALL`,  `CDC_INPATIENT_BEDS_COVID_19`,  `CDC_INPATIENT_BEDS_ICU_ALL`,  `KFF_US_ICU_BEDS`,  `SCS_BE_DETAILED_HOSPITALISATIONS`
+    -   **Колони:**
+        -   `COUNTRY_REGION`  (text)
+        -   `PROVINCE_STATE`  (text)
+        -   `DATE`  (date)
+        -   `INPATIENT_BEDS_OCCUPIED`  (number)
+        -   `TOTAL_INPATIENT_BEDS`  (number)
+        -   `INPATIENT_BEDS_IN_USE_PCT`  (float)
+        -   `ICU_BEDS_OCCUPIED`  (number)
+        -   `TOTAL_ICU_BEDS`  (number)
+        -   `ICU_BEDS_IN_USE_PCT`  (float)
+        -   `PATIENTS_ON_VENTILATORS`  (number)
+        -   `NEW_IN`  (number)
+        -   `NEW_OUT`  (number)
+            
+---
+3.  **Testing_data**
+-   **Таблици, които ще се съединят::**  `CDC_TESTING`,  `CT_US_COVID_TESTS`,  `NYC_HEALTH_TESTS`,  `SCS_BE_DETAILED_TESTS`
+    -   **Columns:**
+        -   `COUNTRY_REGION`  (text)
+        -   `PROVINCE_STATE`  (text)
+        -   `DATE`  (date)
+        -   `TOTAL_TESTS`  (number)
+        -   `POSITIVE_TESTS`  (number)
+        -   `NEGATIVE_TESTS`  (number)
+        -   `INCONCLUSIVE_TESTS`  (number)
+        -   `PERCENT_POSITIVE`  (float)
+            
+---
+4.  **Vaccination_data**
+-   **Tаблици, които ще се съединят:**  `JHU_VACCINES`,  `OWID_VACCINATIONS`
+    -   **Колони:**
+        -   `COUNTRY_REGION`  (text)
+        -   `PROVINCE_STATE`  (text)
+        -   `DATE`  (date)
+        -   `TOTAL_VACCINATIONS`  (number)
+        -   `PEOPLE_VACCINATED`  (number)
+        -   `PEOPLE_FULLY_VACCINATED`  (number)
+        -   `DAILY_VACCINATIONS`  (number)
+        - `VACCINE_COMPANY` (text)
+        -   `VACCINES_USED`  (text)
+            
+---
+5.  **Case_and_death_data**
+-   **Таблици, които ще се съединят:**  `ECDC_GLOBAL`,  `ECDC_GLOBAL_WEEKLY`,  `JHU_COVID_19`,  `JHU_COVID_19_TIMESERIES`,  `JHU_DASHBOARD_COVID_19_GLOBAL`,  `NYT_US_COVID19`,  `PCM_DPS_COVID_19`,  `PCM_DPS_COVID19_DETAILS`,  `RKI_GER_COVID19_DASHBOARD`,  `SCS_BE_DETAILED_MORTALITY`,  `SCS_BE_DETAILED_PROVINCE_CASE_COUNTS`,  `VH_CAN_DETAILED`,  `WHO_DAILY_REPORT`,  `WHO_SITUATION_REPORTS`
+    -   **Колони:**
+        -   `COUNTRY_REGION`  (text)
+        -   `PROVINCE_STATE`  (text)
+        -   `DATE`  (date)
+        -   `TOTAL_CASES`  (number)
+        -   `NEW_CASES`  (number)
+        -   `TOTAL_DEATHS`  (number)
+        -   `NEW_DEATHS`  (number)
+        -   `CASES_PER_100K`  (float)
+        -   `DEATHS_PER_100K`  (float)
+        -   `RECOVERED`  (number)
+        -   `ACTIVE_CASES`  (number)
+            
+---
+6.  **Policy_measures**
+-   **Таблици, които ще се съединят:**  `CDC_POLICY_MEASURES`,  `HDX_ACAPS`,  `HUM_RESTRICTIONS_AIRLINE`,  `HUM_RESTRICTIONS_COUNTRY`,  `KFF_US_POLICY_ACTIONS`,  `KFF_US_REOPENING_TIMELINE_INCREMENT`,  `KFF_US_MITIGATIONS`,  `NYT_US_REOPEN_STATUS`
+    -   **Колони:**
+        -   `COUNTRY_REGION`  (text)
+        -   `PROVINCE_STATE`  (text)
+        -   `DATE_IMPLEMENTED`  (date)
+        -   `POLICY_TYPE`  (text)
+        -   `MEASURE`  (text)
+        -   `RESTRICTION_START`  (date)
+        -   `RESTRICTION_END`  (date)
+        -   `STATUS`  (text) – "Reopened", "Easing Restrictions", ...
+        -   `SOURCE`  (text)
+            
+---
+7.  **Demographics**
+-   **Таблици, които ще се съединят:**  `DATABANK_DEMOGRAPHICS`,  `DEMOGRAPHICS`
+    -   **Колони:**
+        -   `COUNTRY_REGION`  (text)
+        -   `PROVINCE_STATE`  (text)
+        -   `TOTAL_POPULATION`  (number)
+        -   `TOTAL_MALE_POPULATION`  (number)
+        -   `TOTAL_FEMALE_POPULATION`  (number)
+        -   `LATITUDE`  (float)
+        -   `LONGITUDE`  (float)
+            
+---
+8.  **Metadata**
+-   **Таблици, които ще се съединят:**  `METADATA`
+    -   **Колони:**
+        -   `TABLE`  (varchar)
+        -   `DESCRIPTION`  (varchar)
+        -   `COLUMN`  (varchar)
+        -   `TYPE`  (varchar)
+        -   `COMMENTS`  (varchar)
+        -   `NULLABLE`  (varchar)
+        -   `SOURCE`  (varchar)
 
 ### Примерни връзки между новите таблици:
 | Таблица 1                      | Таблица 2                        | Връзка                                  | Причина                                                                                  | Пример за използване                                                               |
